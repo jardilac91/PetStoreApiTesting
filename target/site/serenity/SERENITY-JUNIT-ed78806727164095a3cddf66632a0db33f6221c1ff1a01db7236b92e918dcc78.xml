@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Post Pets" skipped="0" tests="3" time="0.79" timestamp="2024-10-12 03:35:12"><testcase name="Create a new Pet"/><testcase name="Create a Pet with a new status"/><testcase name="Create a new pet without id"/></testsuite>
