@@ -1,26 +1,18 @@
 package petStoreApi.stepdefinitions.store;
 
 import com.github.javafaker.Faker;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import net.serenitybdd.rest.SerenityRest;
-import org.co.models.pets.Category;
-import org.co.models.pets.Pet;
-import org.co.models.pets.Tag;
-import org.co.models.store.Order;
-import org.co.models.store.Inventory;
+import org.co.entity.store.Order;
+import org.co.entity.store.Inventory;
 import org.co.questions.ResponseContent;
-import org.co.questions.store.ResponseOrderContent;
-import org.co.tasks.SendGetRequestWithId;
+import org.co.tasks.SendGetRequestWithParams;
 import org.co.tasks.SendGetRequestWithoutId;
 import org.co.tasks.SendPostRequest;
 import org.co.utils.DataGenerator;
 import petStoreApi.config.MakeAnApiRequest;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 import static java.lang.Integer.parseInt;
@@ -91,6 +83,7 @@ public class PostOrderStepDefinitions extends MakeAnApiRequest {
         actor.attemptsTo(
                 SendGetRequestWithoutId.using(STORE_INVENTORY)
         );
+
         oldInventory = actor.asksFor(
                 ResponseContent.ofType(Inventory.class)
         );
@@ -106,10 +99,8 @@ public class PostOrderStepDefinitions extends MakeAnApiRequest {
 
     @When("The user sends a Post request to create the order with an invalid id.")
     public void theUserSendsAPostRequestToCreateTheOrderWithAnInvalidId() {
-        invalidOrderId = "abc";
-        String requestBody = String.format("{ \"id\": \"%s\", \"quantity\": 5, \"shipDate\": \"2024-09-12T17:32:06.284Z\" , \"status\": \"placed\", \"completed\": true }", invalidOrderId);
         actor.attemptsTo(
-                SendPostRequest.to(CREATE_ORDER).withData(requestBody)
+                SendPostRequest.to(CREATE_ORDER).withData(INVALID_ORDER_REQUEST)
         );
 
     }
@@ -117,9 +108,13 @@ public class PostOrderStepDefinitions extends MakeAnApiRequest {
     @And("should see that the order was created in the platform.")
     public void shouldSeeThatTheOrderWasCreatedInThePlatform() {
         actor.attemptsTo(
-                SendGetRequestWithId.using(ORDER_BY_ID, order.getId().toString())
+                SendGetRequestWithParams.withParam(ORDER_BY_ID, "id", order.getId().toString())
         );
-        Order responseOrder = new ResponseOrderContent().answeredBy(actor);
+
+        Order responseOrder = actor.asksFor(
+                ResponseContent.ofType(Order.class)
+        );
+
         actor.should(
                 seeThat(
                         "The user get the order quantity: ",

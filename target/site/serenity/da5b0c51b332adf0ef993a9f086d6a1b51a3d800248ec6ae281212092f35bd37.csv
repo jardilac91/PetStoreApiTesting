@@ -1,3 +1,4 @@
 "Story","Title","Result","Date","Stability","Duration (s)"
-"delete order","Delete a non-existent order","FAILURE","2024-10-13T00:47:14.9517414-05:00[America/Bogota]","0.0","0.01"
-"Get orders","get an existent order","FAILURE","2024-10-13T00:47:15.2990904-05:00[America/Bogota]","0.0","0.02"
+"Delete pets","Delete a non-existent pet","FAILURE","2024-10-13T13:27:35.9267608-05:00[America/Bogota]","0.0","0.01"
+"Delete order","Delete a non-existent order","FAILURE","2024-10-13T13:28:02.7706998-05:00[America/Bogota]","0.0","0.01"
+"Delete user","Delete a non-existent user","FAILURE","2024-10-13T13:28:53.3180925-05:00[America/Bogota]","0.0","0.02"

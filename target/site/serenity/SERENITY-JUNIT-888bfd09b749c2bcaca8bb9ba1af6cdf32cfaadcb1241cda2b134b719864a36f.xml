@@ -1,9 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="1" name="Get orders" skipped="0" tests="3" time="0.59" timestamp="2024-10-13 12:47:15"><testcase name="get an existent order"><failure message="&#13;&#10;Expected: &lt;100&gt;&#13;&#10;     but: was &lt;-7&gt;" type="java.lang.AssertionError">&#13;
-Expected: &lt;100&gt;&#13;
-     but: was &lt;-7&gt;</failure><system-err>&#13;
-Expected: &lt;100&gt;&#13;
-     but: was &lt;-7&gt;&#13;
-petStoreApi.stepdefinitions.store.GetOrderStepDefinitions.theResponseShouldContainsTheQuantityAndTheStatus(GetOrderStepDefinitions.java:45)&#13;
-worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)&#13;
-worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)&#13;
-</system-err></testcase><testcase name="get an order with a non-existent id"/><testcase name="get an order with an invalid id"/></testsuite>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Get orders" skipped="0" tests="3" time="0.4" timestamp="2024-10-13 01:28:03"><testcase name="get an existent order"/><testcase name="get an order with a non-existent id"/><testcase name="get an order with an invalid id"/></testsuite>

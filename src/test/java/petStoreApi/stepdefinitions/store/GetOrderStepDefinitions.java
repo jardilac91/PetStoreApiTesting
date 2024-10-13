@@ -4,10 +4,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.co.models.store.Order;
+import org.co.entity.store.Order;
 import org.co.questions.ResponseCode;
-import org.co.questions.store.ResponseOrderContent;
-import org.co.tasks.SendGetRequestWithId;
+import org.co.questions.ResponseContent;
+import org.co.tasks.SendGetRequestWithParams;
 import petStoreApi.config.MakeAnApiRequest;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -25,7 +25,7 @@ public class GetOrderStepDefinitions extends MakeAnApiRequest {
     @When("The user sends a get request using the order id {string}.")
     public void theUserSendsAGetRequestUsingThePetId(String id) {
         actor.attemptsTo(
-                SendGetRequestWithId.using(ORDER_BY_ID, id)
+                SendGetRequestWithParams.withParam(ORDER_BY_ID, "id", id)
         );
     }
 
@@ -41,15 +41,17 @@ public class GetOrderStepDefinitions extends MakeAnApiRequest {
 
     @And("The response should contains the quantity {int} and the status {string}.")
     public void theResponseShouldContainsTheQuantityAndTheStatus(int quantity, String status) {
-        Order order = new ResponseOrderContent().answeredBy(actor);
+        Order responseOrder = actor.asksFor(
+                ResponseContent.ofType(Order.class)
+        );
         actor.should(
                 seeThat(
                         "The user get the order quantity: ",
-                        orderQuantity -> order.getQuantity(), equalTo(quantity)
+                        orderQuantity -> responseOrder.getQuantity(), equalTo(quantity)
                 ),
                 seeThat(
                         "The user get the pet status: ",
-                        orderStatus -> order.getStatus(), equalTo(status)
+                        orderStatus -> responseOrder.getStatus(), equalTo(status)
                 )
         );
     }

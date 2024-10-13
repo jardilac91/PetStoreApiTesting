@@ -11,11 +11,14 @@ import static org.co.utils.PetStoreApiConstants.PET_BY_ID;
 public class SendDeleteRequestWithId implements Task  {
 
     private final String endpoint;
-    private final String id;
 
-    public SendDeleteRequestWithId(String endpoint, String id){
+    private final String paramName;
+    private final String paramValue;
+
+    public SendDeleteRequestWithId(String endpoint, String paramName, String paramValue){
         this.endpoint = endpoint;
-        this.id = id;
+        this.paramName = paramName;
+        this.paramValue = paramValue;
     }
 
     @Override
@@ -24,12 +27,12 @@ public class SendDeleteRequestWithId implements Task  {
                 Delete.from(endpoint)
                         .with(request -> request.
                                 header("Content-Type", "application/json")
-                                .pathParam("id", id)
+                                .pathParam(paramName, paramValue)
                         )
         );
     }
 
-    public static Performable using(String endpoint, String id){
-        return instrumented(SendDeleteRequestWithId.class, endpoint, id);
+    public static Performable withParam(String endpoint, String paramName, String paramValue){
+        return instrumented(SendDeleteRequestWithId.class, endpoint, paramName, paramValue);
     }
 }

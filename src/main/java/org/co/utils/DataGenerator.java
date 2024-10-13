@@ -1,9 +1,8 @@
 package org.co.utils;
 
 import com.github.javafaker.Faker;
-import org.co.models.pets.Tag;
+import org.co.entity.pets.Tag;
 
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -43,8 +42,27 @@ public class DataGenerator {
         return String.valueOf(random.nextInt(85)+16);
     }
 
-    public static String generateRandomPetName(){
+    public static String generateRandomName(){
         return faker.name().firstName();
+    }
+
+    public static String generateRandomUserName(){
+        return faker.name().username();
+    }
+    public static String generateRandomLastName(){
+        return faker.name().lastName();
+    }
+
+    public static String generateRandomEmail(){
+        return faker.internet().emailAddress();
+    }
+
+    public static String generateRandomPassword(){
+        return faker.internet().password();
+    }
+
+    public static String generateRandomPhone(){
+        return faker.phoneNumber().phoneNumber();
     }
 
     public static String generateRandomStatus(){
@@ -84,6 +102,8 @@ public class DataGenerator {
     public static String generateRandomOrderStatus(){
         return ORDER_STATUS_OPTIONS.get(random.nextInt(ORDER_STATUS_OPTIONS.size()));
     }
+
+
 
 
 

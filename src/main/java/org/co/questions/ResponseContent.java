@@ -3,7 +3,6 @@ package org.co.questions;
 import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
-import org.co.models.pets.Pet;
 
 public class ResponseContent<T> implements Question<T> {
 
