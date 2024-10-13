@@ -7,10 +7,10 @@ import io.cucumber.java.en.When;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
-import org.co.models.pets.Pet;
+import org.co.entity.pets.Pet;
 import org.co.questions.ResponseCode;
-import org.co.questions.pets.ResponsePetContent;
-import org.co.tasks.SendGetRequestWithId;
+import org.co.questions.ResponseContent;
+import org.co.tasks.SendGetRequestWithParams;
 import petStoreApi.config.MakeAnApiRequest;
 
 
@@ -28,7 +28,7 @@ public class GetPetStepDefinitions extends MakeAnApiRequest {
     @When("The user sends a get request using the pet id {string}.")
     public void theUserSendsAGetRequestUsingThePetId(String id) {
         actor.attemptsTo(
-                SendGetRequestWithId.using(PET_BY_ID, id)
+                SendGetRequestWithParams.withParam(PET_BY_ID, "id", id)
         );
     }
 
@@ -44,15 +44,17 @@ public class GetPetStepDefinitions extends MakeAnApiRequest {
 
     @And("The response should contains the name {string} and the status {string}")
     public void theResponseShouldContainsTheNameAndTheStatus(String name, String status) {
-        Pet pet = new ResponsePetContent().answeredBy(actor);
+        Pet responsePet = actor.asksFor(
+                ResponseContent.ofType(Pet.class)
+        );
         actor.should(
                 seeThat(
                         "The user get the pet name: ",
-                        petName -> pet.getName(), equalTo(name)
+                        petName -> responsePet.getName(), equalTo(name)
                 ),
                 seeThat(
                         "The user get the pet status: ",
-                        petStatus -> pet.getStatus(), equalTo(status)
+                        petStatus -> responsePet.getStatus(), equalTo(status)
                 )
         );
     }

@@ -18,4 +18,23 @@ public class PetStoreApiConstants {
     public static String LOGOUT_USER = "user/logout";
     public static String USERNAME = "user/{username}";
 
+    public static String INVALID_ORDER_REQUEST = "{\n" +
+            "  \"id\": \"abc\",\n" +
+            "  \"quantity\": 5,\n" +
+            "  \"shipDate\": \"2024-09-12T17:32:06.284Z\",\n" +
+            "  \"status\": \"placed\",\n" +
+            "  \"completed\": true\n" +
+            "}";
+
+    public static String INVALID_USER_CREATION_REQUEST = "{\n" +
+            "  \"id\": \"abc\",\n" +
+            "  \"username\": userJhon,\n" +
+            "  \"firstName\": \"John\",\n" +
+            "  \"lastName\": \"James\",\n" +
+            "  \"email\": \"johne@mail.com\",\n" +
+            "  \"password\": \"12345\",\n" +
+            "  \"phone\": \"12345\",\n" +
+            "  \"userStatus\": 1\n" +
+            "}";
+
 }

@@ -3,15 +3,14 @@ package petStoreApi.stepdefinitions.pets;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import org.co.models.pets.Category;
-import org.co.models.pets.Pet;
-import org.co.models.pets.Tag;
-import org.co.questions.pets.ResponsePetContent;
+import org.co.entity.pets.Category;
+import org.co.entity.pets.Pet;
+import org.co.entity.pets.Tag;
+import org.co.questions.ResponseContent;
 import org.co.tasks.SendPostRequest;
-import org.co.tasks.SendGetRequestWithId;
+import org.co.tasks.SendGetRequestWithParams;
 
 import org.co.utils.DataGenerator;
 import petStoreApi.config.MakeAnApiRequest;
@@ -21,6 +20,7 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static org.co.utils.PetStoreApiConstants.ADD_OR_UPDATE_PET;
 import static org.co.utils.PetStoreApiConstants.PET_BY_ID;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -31,7 +31,7 @@ public class PostPetStepDefinitions extends MakeAnApiRequest {
     @Given("The user wants to create a pet with random data.")
     public void theUserWantsToCreateAPetWithRandomData() {
         String petId = DataGenerator.generateRandomId();
-        String petName = DataGenerator.generateRandomPetName();
+        String petName = DataGenerator.generateRandomName();
         String categoryId = DataGenerator.generateRandomId();
         String categoryName = DataGenerator.generateRandomAnimalCategory();
         List<String> photoUrls = DataGenerator.generateRandomPhotoUrlList();
@@ -76,7 +76,7 @@ public class PostPetStepDefinitions extends MakeAnApiRequest {
     @When("The user sends a Post request to create the pet.")
     public void theUserSendsAPostRequestToCreateAPet() {
         actor.attemptsTo(
-                SendPostRequest.to(PET_BY_ID).withData(pet)
+                SendPostRequest.to(ADD_OR_UPDATE_PET).withData(pet)
         );
 
     }
@@ -84,9 +84,9 @@ public class PostPetStepDefinitions extends MakeAnApiRequest {
     @And("should see that the pet was created in the platform.")
     public void shouldSeeThatThePetWasCreatedInThePlatform() {
         actor.attemptsTo(
-                SendGetRequestWithId.using(PET_BY_ID, pet.getId().toString())
+                SendGetRequestWithParams.withParam(PET_BY_ID, "id", pet.getId().toString())
         );
-        Pet responsePet = new ResponsePetContent().answeredBy(actor);
+        Pet responsePet = actor.asksFor(ResponseContent.ofType(Pet.class));
         actor.should(
                 seeThat(
                         "The user get the pet name: ",

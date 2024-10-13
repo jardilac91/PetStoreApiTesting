@@ -4,9 +4,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import net.serenitybdd.rest.SerenityRest;
-import org.co.models.pets.Pet;
-import org.co.questions.pets.ResponsePetContent;
-import org.co.tasks.SendGetRequestWithId;
+import org.co.entity.pets.Pet;
+import org.co.questions.ResponseContent;
+import org.co.tasks.SendGetRequestWithParams;
 import org.co.tasks.SendPutRequest;
 import org.co.tasks.pets.UpdatePetbyId;
 import org.co.utils.DataGenerator;
@@ -29,7 +29,7 @@ public class PutPetStepDefinitions extends MakeAnApiRequest {
     public void theUserSentAGetRequestUsingThePetId(String id) {
         petId = id;
         actor.attemptsTo(
-                SendGetRequestWithId.using(PET_BY_ID, petId)
+                SendGetRequestWithParams.withParam(PET_BY_ID, "id", petId)
         );
 
         pet = SerenityRest.lastResponse().as(Pet.class);
@@ -40,7 +40,7 @@ public class PutPetStepDefinitions extends MakeAnApiRequest {
 
     @And("The user wants to update the pet's name and status.")
     public void theUserWantsToUpdateThePetWithTheData() {
-        String randomPetName = DataGenerator.generateRandomPetName();
+        String randomPetName = DataGenerator.generateRandomName();
         String randomStatus = DataGenerator.generateRandomStatus();
         while(randomStatus.equals(oldStatus)){
             randomStatus = DataGenerator.generateRandomStatus();
@@ -58,7 +58,7 @@ public class PutPetStepDefinitions extends MakeAnApiRequest {
 
     @When("The user sends a post request to update the pet's name and status.")
     public void theUserSendsAPostRequestToUpdateThePetSNameAndStatus() {
-        String randomPetName = DataGenerator.generateRandomPetName();
+        String randomPetName = DataGenerator.generateRandomName();
         String randomStatus = DataGenerator.generateRandomStatus();
         while(randomStatus.equals(oldStatus)){
             randomStatus = DataGenerator.generateRandomStatus();
@@ -70,7 +70,9 @@ public class PutPetStepDefinitions extends MakeAnApiRequest {
 
     @And("The user should see that the pet's name and status were updated.")
     public void theUserShouldSeeThatThePetSNameWasUpdated() {
-        Pet updatedPet = new ResponsePetContent().answeredBy(actor);
+        Pet updatedPet = actor.asksFor(
+                ResponseContent.ofType(Pet.class)
+        );
         actor.should(
                 seeThat(
                         "The pet name is updated: ",

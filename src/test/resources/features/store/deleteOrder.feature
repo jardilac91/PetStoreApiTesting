@@ -1,4 +1,4 @@
-Feature: delete order
+Feature: Delete order
 
   Background:
     Given That the user was able to send requests to the PetStore API.

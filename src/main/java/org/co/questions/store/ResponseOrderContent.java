@@ -3,7 +3,7 @@ package org.co.questions.store;
 import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
-import org.co.models.store.Order;
+import org.co.entity.store.Order;
 
 public class ResponseOrderContent implements Question<Order> {
     @Override
