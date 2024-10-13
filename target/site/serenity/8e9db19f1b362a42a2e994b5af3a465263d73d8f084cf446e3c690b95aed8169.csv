@@ -1,0 +1,3 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"delete order","Delete a non-existent order","FAILURE","2024-10-13T00:47:14.9517414-05:00[America/Bogota]","0.0","0.01"
+"Get orders","get an existent order","FAILURE","2024-10-13T00:47:15.2990904-05:00[America/Bogota]","0.0","0.02"
