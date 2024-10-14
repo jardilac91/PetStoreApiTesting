@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Get user." skipped="0" tests="2" time="0.62" timestamp="2024-10-13 01:28:53"><testcase name="Get user by username"/><testcase name="Send get request with a non-existent username"/></testsuite>

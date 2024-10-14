@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Post Order" skipped="0" tests="3" time="0.97" timestamp="2024-10-13 01:28:03"><testcase name="Create a new order"/><testcase name="Create a new order with a new status"/><testcase name="Create a new order with an invalid id"/></testsuite>

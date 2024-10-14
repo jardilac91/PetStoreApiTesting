@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Update pets" skipped="0" tests="2" time="0.44" timestamp="2024-10-13 01:27:37"><testcase name="Update pet's information using update method"/><testcase name="Update pet's information using post method"/></testsuite>
