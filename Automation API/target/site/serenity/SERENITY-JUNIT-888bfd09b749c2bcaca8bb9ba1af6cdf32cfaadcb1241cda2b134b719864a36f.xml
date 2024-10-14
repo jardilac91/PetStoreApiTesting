@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Get orders" skipped="0" tests="3" time="0.4" timestamp="2024-10-13 01:28:03"><testcase name="get an existent order"/><testcase name="get an order with a non-existent id"/><testcase name="get an order with an invalid id"/></testsuite>
